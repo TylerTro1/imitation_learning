@@ -66,7 +66,7 @@ class PolicyNetwork(nn.Module):
         super().__init__()
 
        #"""TODO: create the layers for the neural network. A two-layer network should be sufficient"""
-        self.network = nn.Sequential(nn.Linear(2, 64), nn.ReLU(), nn.Linear(64, 3))
+        self.network = nn.Sequential(nn.Linear(2, 32), nn.ReLU(), nn.Linear(32, 3))
 
 
 
@@ -107,7 +107,7 @@ def evaluate_policy(pi, num_evals, human_render=True):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=None)
     parser.add_argument('--num_demos', default = 1, type=int, help="number of human demonstrations to collect")
-    parser.add_argument('--num_bc_iters', default = 100, type=int, help="number of iterations to run BC")
+    parser.add_argument('--num_bc_iters', default = 10, type=int, help="number of iterations to run BC")
     parser.add_argument('--num_evals', default=6, type=int, help="number of times to run policy after training for evaluation")
 
     args = parser.parse_args()
