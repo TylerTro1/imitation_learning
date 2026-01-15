@@ -51,13 +51,16 @@ class InvDynamicsNetwork(nn.Module):
 
         #################
         #TODO:
+
+        nn.Sequential(nn.Linear(), nn.ReLU(), nn.Linear())
+
         #################
 
     def forward(self, x):
         #this method performs a forward pass through the network
         ###############
         #TODO:
-        ###############
+        ###############0
         return x
     
 
