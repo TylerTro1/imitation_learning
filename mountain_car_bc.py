@@ -42,7 +42,16 @@ def torchify_demos(sas_pairs):
 
 
 def train_policy(obs, acs, nn_policy, num_train_iters):
-    """TODO: train the policy using standard behavior cloning. Feel free to add other helper methods if you'd like or restructure the code as desired."""
+    #"""TODO: train the policy using standard behavior cloning. Feel free to add other helper methods if you'd like or restructure the code as desired."""
+    criterion = nn.CrossEntropyLoss()
+    optimizer = Adam(nn_policy.parameters(), lr = 1e-3)
+
+    for iteration in range(num_train_iters):
+        logits = nn_policy(obs)
+        loss = criterion(logits, acs)
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
 
 
 
@@ -56,12 +65,14 @@ class PolicyNetwork(nn.Module):
     def __init__(self):
         super().__init__()
 
-       """TODO: create the layers for the neural network. A two-layer network should be sufficient"""
+       #"""TODO: create the layers for the neural network. A two-layer network should be sufficient"""
+        self.network = nn.Sequential(nn.Linear(2, 64), nn.ReLU(), nn.Linear(64, 3))
 
 
 
     def forward(self, x):
-        """TODO: this method performs a forward pass through the network, applying a non-linearity (ReLU is fine) on the hidden layers and should output logit values (since this is a discrete action task) for the 3-way classification problem"""
+        #"""TODO: this method performs a forward pass through the network, applying a non-linearity (ReLU is fine) on the hidden layers and should output logit values (since this is a discrete action task) for the 3-way classification problem"""
+        return self.network(x)
 
     
 

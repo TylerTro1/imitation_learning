@@ -56,7 +56,7 @@ class InvDynamicsNetwork(nn.Module):
         # self.relu = nn.ReLU()
         # self.fc2 = nn.Linear(4, 3)
 
-        self.network = nn.Sequential(nn.Linear(4, 4), nn.ReLU(), nn.Linear(4, 3))
+        self.network = nn.Sequential(nn.Linear(4, 64), nn.ReLU(), nn.Linear(64, 3))
 
         #################
 
@@ -78,7 +78,7 @@ class InvDynamicsNetwork(nn.Module):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=None)
-    parser.add_argument('--num_demos', default = 1, type=int, help="number of human demonstrations to collect")
+    parser.add_argument('--num_demos', default = 5, type=int, help="number of human demonstrations to collect")
     parser.add_argument('--num_bc_iters', default = 100, type=int, help="number of iterations to run BC")
     parser.add_argument('--num_evals', default=6, type=int, help="number of times to run policy after training for evaluation")
 
