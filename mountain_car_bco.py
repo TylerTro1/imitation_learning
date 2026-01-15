@@ -52,7 +52,11 @@ class InvDynamicsNetwork(nn.Module):
         #################
         #TODO:
 
-        nn.Sequential(nn.Linear(), nn.ReLU(), nn.Linear())
+        # self.fc1 = nn.Linear(4, 4)
+        # self.relu = nn.ReLU()
+        # self.fc2 = nn.Linear(4, 3)
+
+        self.network = nn.Sequential(nn.Linear(4, 4), nn.ReLU(), nn.Linear(4, 3))
 
         #################
 
@@ -60,6 +64,12 @@ class InvDynamicsNetwork(nn.Module):
         #this method performs a forward pass through the network
         ###############
         #TODO:
+
+        # x = self.fc1(x)
+        # x = self.relu(x)
+        # x = self.fc2(x)
+
+        x = self.network(x)
         ###############0
         return x
     
@@ -88,6 +98,19 @@ if __name__ == "__main__":
     ##################
     #TODO: Train the inverse dyanmics model, no need to be fancy you can do it in one full batch via gradient descent if you like
     ##################
+
+    criterion = nn.CrossEntropyLoss()
+    optimizer = Adam(inv_dyn.parameters(), lr = 1e-3)
+
+    epochs = 5
+
+    for epoch in range(epochs): 
+        outputs = inv_dyn(s_s2_torch)
+        loss = criterion(outputs, a_torch)
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
+
 
 
 
